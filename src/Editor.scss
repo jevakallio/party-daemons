@@ -1,0 +1,227 @@
+// Todo add fonts?
+// @import "public/fonts/iAWriterDuospace";
+
+::selection {
+  background: #fcd7cd;
+}
+
+:root {
+    --app-default-font-family: "iA Writer Duospace", Consolas, "Andale Mono WT",
+      "Andale Mono", "Lucida Console", "Lucida Sans Typewriter",
+      "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Liberation Mono",
+      "Nimbus Mono L", Monaco, "Courier New", Courier, monospace;
+    --app-text-scale: 1;
+    --app-spacing-scale: 1.75;
+    --app-font-family: var(--app-default-font-family);
+  }
+
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  color-scheme: light;
+  color: theme("colors.black");
+  background-color: theme("colors.white");
+
+  &[data-platform="pc"] {
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #cccccc rgba(255, 255, 255, 0);
+
+    /* Chrome, Edge */
+    *::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0);
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background-color: #cccccc;
+      border-radius: 10px;
+      border: 3px solid rgba(255, 255, 255, 0);
+    }
+  }
+}
+
+/* Basic editor styles */
+.ProseMirror {
+  height: 100%;
+  min-height: 100px;
+  outline: none;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 0.5rem;
+  }
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  ul {
+    list-style: "- " outside none;
+    padding-left: 1.2rem;
+  }
+
+  ol {
+    list-style: decimal;
+    padding-left: 1.75rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
+
+  // 1.067 Minor Second Type Scale (https://type-scale.com/)
+  // @TODO: Harmonize paddings?
+  h1 {
+    font-size: 1.383rem;
+    font-weight: 700;
+    padding: 1rem 0 0.5rem 0;
+  }
+  h2 {
+    font-size: 1.296rem;
+    font-weight: 600;
+    padding: 1rem 0 0.5rem 0;
+  }
+  h3 {
+    font-size: 1.215rem;
+    font-weight: 500;
+    padding: 1rem 0 0.5rem 0;
+  }
+  h4 {
+    font-size: 1.138rem;
+    font-weight: 400;
+    padding: 1rem 0 0.5rem 0;
+  }
+  h5 {
+    font-size: 1.067rem;
+    font-weight: 300;
+    padding: 1rem 0 0.5rem 0;
+  }
+
+  code {
+    background-color: rgba(#616161, 0.1);
+    color: #616161;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(#0d0d0d, 0.1);
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid rgba(#0d0d0d, 0.1);
+    margin: 2rem 0;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+}
+
+// default styles
+.main-editor {
+  .ProseMirror {
+    padding-bottom: 40px;
+    font-family: var(--app-font-family);
+    font-size: calc(1rem * var(--app-text-scale));
+    line-height: calc(
+      1rem * var(--app-text-scale) * var(--app-spacing-scale)
+    );
+
+    // 1.125 Major Second Type Scale (https://type-scale.com/)
+    h1 {
+      font-size: calc(1.802rem * var(--app-text-scale));
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: calc(1.602rem * var(--app-text-scale));
+      font-weight: 600;
+      padding: 1rem 0 0.5rem 0;
+    }
+
+    h3 {
+      font-size: calc(1.424rem * var(--app-text-scale));
+      font-weight: 500;
+      padding: 1rem 0 0.5rem 0;
+    }
+
+    h4 {
+      font-size: calc(1.266rem * var(--app-text-scale));
+      font-weight: 400;
+      padding: 1rem 0 0.5rem 0;
+    }
+
+    h5 {
+      font-size: calc(1.125rem * var(--app-text-scale));
+      font-weight: 300;
+      padding: 1rem 0 0.5rem 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      padding-top: calc(1rem * var(--app-text-scale));
+      padding-bottom: calc(0.5rem * var(--app-text-scale));
+    }
+
+    mark[data-editorHighlight] {
+      padding: 2px 0px;
+      background-color: transparent;
+    }
+
+    mark[data-editorHighlight] {
+      background-color: #fecaca;
+    }
+
+    /* Give a remote user a caret */
+    .collaboration-cursor__caret {
+      border-left: 1px solid #0d0d0d;
+      border-right: 1px solid #0d0d0d;
+      margin-left: -1px;
+      margin-right: -1px;
+      pointer-events: none;
+      position: relative;
+      word-break: normal;
+    }
+
+    /* Render the username above the caret */
+    .collaboration-cursor__label {
+      border-radius: 3px 3px 3px 0;
+      color: #0d0d0d;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      left: -1px;
+      line-height: normal;
+      padding: 0.1rem 0.3rem;
+      position: absolute;
+      top: -1.4em;
+      user-select: none;
+      white-space: nowrap;
+    }
+  }
+}

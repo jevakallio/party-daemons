@@ -1,0 +1,5 @@
+{
+    "main": "src/party/index.ts",
+    "name": "party-daemons"
+  }
+  
