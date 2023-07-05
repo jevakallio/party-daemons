@@ -1,5 +1,8 @@
 {
     "main": "src/party/index.ts",
-    "name": "party-daemons"
+    "name": "party-daemons",
+    "parties": {
+      "nitpicker": "./src/party/daemons/nitpicker.ts"
+    }
   }
   

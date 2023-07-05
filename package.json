@@ -18,7 +18,7 @@
     "@tiptap/react": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
     "lodash": "^4.17.21",
-    "partykit": "^0.0.0-e7aa4cd",
+    "partykit": "^0.0.0-3f260d6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "y-partykit": "^0.0.0-e7aa4cd",

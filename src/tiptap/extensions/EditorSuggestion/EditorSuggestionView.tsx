@@ -37,5 +37,11 @@ export function EditorSuggestionView({ node, deleteNode, editor }: Props) {
     deleteNode();
   };
 
-  return <NodeViewWrapper as="span" contentEditable={false}></NodeViewWrapper>;
+  return (
+    <NodeViewWrapper as="span" contentEditable={false}>
+      <span className="absolute inline-block left-0 -ml-20 w-20 text-xs">
+        {comment}
+      </span>
+    </NodeViewWrapper>
+  );
 }

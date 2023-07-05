@@ -18,28 +18,43 @@ export default {
             _currentDoc = ydoc;
           }
 
-          const state = createEditorSyncState(ydoc);
-          const insert = insertEditorSuggestions({
-            onSuggestionAlreadyExists(suggestion) {
-              console.log("onSuggestionAlreadyExists", suggestion);
-            },
-            onSuggestionNotMatched(suggestion) {
-              console.log("onSuggestionNotMatched", suggestion);
-            },
-            suggestions: [
-              {
-                id: "foo",
-                type: "discuss",
-                comment: "What do you think about this?",
-                matcher: "Dogs are cute",
-                createdAt: new Date().toISOString(),
+          try {
+            const matcher = "Dogs are cute";
+            const daemon = room.parties.nitpicker.get("room-1");
+
+            const response: Response = await daemon.fetch(
+              // @ts-expect-error TODO: Fix fetch type signature
+              new Request("", {
+                method: "POST",
+                body: matcher,
+              })
+            );
+            const comment = await response.text();
+
+            const state = createEditorSyncState(ydoc);
+            const insert = insertEditorSuggestions({
+              onSuggestionAlreadyExists(suggestion) {
+                console.log("onSuggestionAlreadyExists", suggestion);
               },
-            ],
-          });
+              onSuggestionNotMatched(suggestion) {
+                console.log("onSuggestionNotMatched", suggestion);
+              },
+              suggestions: [
+                {
+                  id: "foo",
+                  type: "discuss",
+                  comment,
+                  matcher,
+                  createdAt: new Date().toISOString(),
+                },
+              ],
+            });
 
-          const success = insert({ state });
-
-          console.log("success?", success);
+            const success = insert({ state });
+            console.log("success?", success);
+          } catch (e) {
+            console.error("Failed to do the thing", e);
+          }
         },
       },
     });
