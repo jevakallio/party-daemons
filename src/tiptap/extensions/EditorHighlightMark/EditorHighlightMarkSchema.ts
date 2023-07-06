@@ -35,6 +35,8 @@ export const EditorHighlightMarkSchema = Mark.create<EditorHighlightOptions>({
     return {
       suggestionId: createHtmlDataAttribute("suggestionId"),
 
+      type: createHtmlDataAttribute("type"),
+
       // whether highlight is forcibly visible
       // (all highlights are visible in suggestions mode)
       visible: createHtmlDataAttribute(

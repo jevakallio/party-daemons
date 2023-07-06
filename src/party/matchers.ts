@@ -1,4 +1,6 @@
-const daemons = {
+import { Daemon } from "./daemons";
+
+const available = {
   nitpicker: true,
   superfan: true,
 };
@@ -8,12 +10,10 @@ const matchers: Record<Daemon, string> = {
   superfan: "I'm not sure about this",
 };
 
-type Daemon = keyof typeof daemons;
-
-export const isAvailable = (daemon: Daemon) => daemons[daemon] === true;
+export const isAvailable = (daemon: Daemon) => available[daemon] === true;
 
 export const markRun = (daemon: Daemon) => {
-  daemons[daemon] = false;
+  available[daemon] = false;
 };
 
 export const getMatcher = (daemon: Daemon) => {

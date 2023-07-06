@@ -1,13 +1,24 @@
 import { NodeViewWrapper, NodeViewProps } from "@tiptap/react";
+import { useActiveDaemon } from "../../../store";
+import { useEffect } from "react";
+import { Daemon } from "../../../party/daemons";
 
 type Props = NodeViewProps;
 
 export function EditorSuggestionView({ node, deleteNode, editor }: Props) {
   const { id, type, comment } = node.attrs as {
     id: string;
-    type: string;
+    type: Daemon;
     comment: string;
   };
+
+  // TODO: ugh
+  const setActiveDaemon = useActiveDaemon((s) => s.setActiveDaemon);
+  useEffect(() => {
+    if (type) {
+      setActiveDaemon(type);
+    }
+  }, [type, setActiveDaemon]);
 
   const deleteHighlights = (suggestionId: string) => {
     editor.commands.removeEditorSuggestionHighlights({ suggestionId });
@@ -37,11 +48,13 @@ export function EditorSuggestionView({ node, deleteNode, editor }: Props) {
     deleteNode();
   };
 
+  console.log("type", type);
+
   return (
     <NodeViewWrapper as="span" contentEditable={false}>
-      <span className="absolute inline-block left-0 -ml-20 w-20 text-xs">
+      <div className="absolute inline-block left-0 -ml-72 w-64 bg-white p-4 rounded text-sm select-none">
         {comment}
-      </span>
+      </div>
     </NodeViewWrapper>
   );
 }

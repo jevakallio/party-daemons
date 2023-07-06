@@ -17,7 +17,7 @@
     "@tiptap/pm": "^2.0.3",
     "@tiptap/react": "^2.0.3",
     "@tiptap/starter-kit": "^2.0.3",
-    "ai": "^2.1.15",
+    "classnames": "^2.3.2",
     "lodash": "^4.17.21",
     "openai-edge": "^1.1.1",
     "partykit": "^0.0.0-3f260d6",
@@ -25,7 +25,8 @@
     "react-dom": "^18.2.0",
     "y-partykit": "^0.0.0-e7aa4cd",
     "y-prosemirror": "^1.0.15",
-    "yjs": "^13.6.6"
+    "yjs": "^13.6.6",
+    "zustand": "^4.3.9"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.195",

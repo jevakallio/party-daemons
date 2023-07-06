@@ -213,6 +213,7 @@ function insertEditorSuggestionNodes(
       change.offset + change.to + 1,
       state.schema.marks.editorHighlight.create({
         suggestionId: change.id,
+        type: change.type,
       })
     );
 

@@ -22,7 +22,7 @@ body {
 
   color-scheme: light;
   color: theme("colors.black");
-  background-color: theme("colors.white");
+  background-color: theme("colors.gray.100");
 
   &[data-platform="pc"] {
     /* Firefox */
@@ -194,7 +194,15 @@ body {
     }
 
     mark[data-editorHighlight] {
-      background-color: #fecaca;
+      background-color: #eeeeee;
+    }
+
+    mark[data-editorHighlight][data-type=nitpicker] {
+      background-color: #fecdd3;
+    }
+
+    mark[data-editorHighlight][data-type=superfan] {
+      background-color: #bae6fd;
     }
 
     /* Give a remote user a caret */

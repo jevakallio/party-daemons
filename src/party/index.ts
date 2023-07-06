@@ -49,15 +49,6 @@ export default {
 
             console.log("text is", text);
 
-            // // invoke all daemon
-            // const results = await Promise.all(
-            //   Object.entries(room.parties).map(
-            //     ([key, party]: [string, any]) => {
-            //       return invokeDaemon(party.get(`${key}-1`), text);
-            //     }
-            //   )
-            // );
-
             const results = await Promise.all([
               invokeDaemon(room.parties.nitpicker.get("nitpicker-1"), text),
               invokeDaemon(room.parties.superfan.get("superfan-1"), text),
