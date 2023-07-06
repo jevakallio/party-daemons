@@ -2,7 +2,7 @@ import { PartyKitServer } from "partykit/server";
 import { formatResponse, getSample } from "../matchers";
 import { getChatCompletionResponse } from "../openai";
 
-const DAEMON = "nitpicker";
+const DAEMON = "superfan";
 
 export default {
   async onRequest(request: Request) {
@@ -12,7 +12,7 @@ export default {
 
       if (sample) {
         const comment = await getChatCompletionResponse(`
-          You are a nit-picker. Write a short, obnoxious, nit-picky, one-sentence rebuttal to the phrase "${sample}", starting with the words "Well, actually"
+          You are a supportive friend. Write a short, supportive, cheering, one-sentence statement to the phrase "${sample}", starting with the words "Hey, buddy!"
         `);
 
         if (comment) {

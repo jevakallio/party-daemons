@@ -11,6 +11,34 @@ import { updateYFragment } from "y-prosemirror/plugins/sync-plugin";
 
 const transformer = TiptapTransformer.extensions(getSchemaExtensions());
 
+const rootFragmentField = "default";
+
+/**
+ * A hacky way of applying a transaction to a prosemirror document and
+ * syncing the changes to the provided Y.js document. This is a workaround
+ * to y-prosemirror requiring access to prosemirror-view, which requires DOM.
+ *
+ * There is most likely a better way of doing this
+ */
+export function createEditorState(ydoc: Doc, plugins?: Plugin[]) {
+  try {
+    // construct a prosemirror schema using our tiptap extensions
+    const schema = getSchema(transformer.defaultExtensions);
+    const json = transformer.fromYdoc(ydoc, rootFragmentField);
+    const pmdoc = Node.fromJSON(schema, json);
+    const state = EditorState.create({
+      doc: pmdoc,
+      schema,
+      plugins,
+    });
+
+    return state;
+  } catch (e) {
+    console.error("Failed to initialize editor state", e);
+    throw e;
+  }
+}
+
 /**
  * A hacky way of applying a transaction to a prosemirror document and
  * syncing the changes to the provided Y.js document. This is a workaround
@@ -20,14 +48,8 @@ const transformer = TiptapTransformer.extensions(getSchemaExtensions());
  */
 export function createEditorSyncState(ydoc: Doc) {
   try {
-    // construct a prosemirror schema using our tiptap extensions
-    const schema = getSchema(transformer.defaultExtensions);
-
     // construct a prosemirror document from current y.js state
-    const rootFragmentField = "default";
     const fragment = ydoc.getXmlFragment(rootFragmentField);
-    const json = transformer.fromYdoc(ydoc, rootFragmentField);
-    const pmdoc = Node.fromJSON(schema, json);
 
     // on every prosemirror transaction, update the Y.js document
     const syncChanges = new Plugin({
@@ -44,14 +66,8 @@ export function createEditorSyncState(ydoc: Doc) {
       },
     });
 
-    // create an editor state instance
-    const state = EditorState.create({
-      doc: pmdoc,
-      schema,
-      plugins: [syncChanges],
-    });
-
-    return state;
+    return createEditorState(ydoc, [syncChanges]);
+    å;
   } catch (e) {
     console.error("Failed to update editor state", e);
     throw e;

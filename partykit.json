@@ -1,8 +1,12 @@
 {
     "main": "src/party/index.ts",
     "name": "party-daemons",
+    "define": {
+      "process.env.OPENAI_API_KEY": "\"TODO\""
+    },
     "parties": {
-      "nitpicker": "./src/party/daemons/nitpicker.ts"
+      "nitpicker": "./src/party/daemons/nitpicker.ts",
+      "superfan": "./src/party/daemons/superfan.ts"
     }
   }
   
