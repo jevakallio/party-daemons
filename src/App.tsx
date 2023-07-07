@@ -8,7 +8,7 @@ function App() {
   const focusedDaemonClassName = focusedDaemon ? `focus-${focusedDaemon}` : "";
   return (
     <main className="flex w-full bg-gray-100 justify-center">
-      <section className="p-4 hidden md:block"></section>
+      <section className="p-4 hidden md:block w-52"></section>
       <section
         className={`flex-1 max-w-xl bg-white md:mx-8 px-6 py-4 rounded ${focusedDaemonClassName}`}
       >

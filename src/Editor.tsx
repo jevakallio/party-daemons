@@ -18,6 +18,11 @@ const provider = new YPartyKitProvider(
   ydoc
 );
 
+const name =
+  new URLSearchParams(window.location.search).get("name") ?? "Anonymous";
+const color =
+  new URLSearchParams(window.location.search).get("color") ?? "#f783ac";
+
 export const Editor = () => {
   const editor = useEditor({
     extensions: [
@@ -28,10 +33,9 @@ export const Editor = () => {
       }),
       CollaborationCursor.configure({
         provider: provider,
-        // TODO: Read user from url/session
         user: {
-          name: "Anonymous",
-          color: "#f783ac",
+          name,
+          color,
         },
       }),
     ],

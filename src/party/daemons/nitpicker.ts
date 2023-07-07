@@ -25,7 +25,7 @@ export default {
       lastRun = new Date();
 
       const comment = await getChatCompletionResponse(`
-        You are a nit-picker. Write a short, obnoxious, nit-picky, one-sentence rebuttal to the phrase "${sample}", starting with the words "Well, actually"
+        You are a nit-picker. Write a short, obnoxious, nit-picky, one-sentence rebuttal to the phrase "LLMs are capable of ${sample}", starting with the words "Well, actually"
       `);
 
       if (comment) {

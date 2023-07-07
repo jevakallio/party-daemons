@@ -1,9 +1,9 @@
 import { Daemon } from "./daemons";
 
 const matchers: Record<Daemon, string> = {
-  nitpicker: "dogs are cute",
-  superfan: "I'm not sure about this",
-  someguy: "Bro",
+  nitpicker: "reasoning",
+  superfan: "I don't know",
+  someguy: "Todd",
 };
 
 export const getMatcher = (daemon: Daemon) => {
@@ -19,7 +19,7 @@ export const getSample = async (
     const body = await request.json();
     const text = body?.text;
     if (typeof text === "string") {
-      if (text.includes(matcher)) {
+      if (text.toLowerCase().includes(matcher.toLowerCase())) {
         return matcher;
       }
     }
