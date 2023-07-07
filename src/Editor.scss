@@ -198,7 +198,9 @@ body {
     }
 
     mark[data-editorHighlight][data-type=nitpicker] {
-      background-color: #fecdd3;
+      .focus-nitpicker & {
+        background-color: #fecdd3;
+      }
     }
 
     mark[data-editorHighlight][data-type=superfan] {

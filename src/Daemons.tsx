@@ -1,11 +1,10 @@
 import { Daemon } from "./Daemon";
+import { Daemon as TDaemon } from "./party/daemons";
 import { getDaemons, getName, getColor } from "./party/daemons";
-import { useActiveDaemon } from "./store";
 
 const daemons = getDaemons();
 
-export function Daemons() {
-  const activeDaemon = useActiveDaemon((s) => s.activeDaemon);
+export function Daemons({ activeDaemon }: { activeDaemon: TDaemon | null }) {
   return (
     <div>
       <ul className="flex flex-col space-y-2">

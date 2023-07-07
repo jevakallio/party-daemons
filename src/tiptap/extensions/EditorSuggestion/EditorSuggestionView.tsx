@@ -14,6 +14,8 @@ export function EditorSuggestionView({ node, deleteNode, editor }: Props) {
 
   // TODO: ugh
   const setActiveDaemon = useActiveDaemon((s) => s.setActiveDaemon);
+  const focusedDaemon = useActiveDaemon((s) => s.focusedDaemon);
+
   useEffect(() => {
     if (type) {
       setActiveDaemon(type);
@@ -52,9 +54,11 @@ export function EditorSuggestionView({ node, deleteNode, editor }: Props) {
 
   return (
     <NodeViewWrapper as="span" contentEditable={false}>
-      <div className="absolute inline-block left-0 -ml-72 w-64 bg-white p-4 rounded text-sm select-none">
-        {comment}
-      </div>
+      {focusedDaemon === type ? (
+        <div className="absolute inline-block left-0 -ml-72 w-64 bg-white p-4 rounded text-sm select-none">
+          {comment}
+        </div>
+      ) : null}
     </NodeViewWrapper>
   );
 }
