@@ -1,19 +1,9 @@
 import { Daemon } from "./daemons";
 
-const available = {
-  nitpicker: true,
-  superfan: true,
-};
-
 const matchers: Record<Daemon, string> = {
   nitpicker: "dogs are cute",
   superfan: "I'm not sure about this",
-};
-
-export const isAvailable = (daemon: Daemon) => available[daemon] === true;
-
-export const markRun = (daemon: Daemon) => {
-  available[daemon] = false;
+  someguy: "Bro",
 };
 
 export const getMatcher = (daemon: Daemon) => {
@@ -24,15 +14,13 @@ export const getSample = async (
   daemon: Daemon,
   request: Request
 ): Promise<string | null> => {
-  if (isAvailable(daemon)) {
-    const matcher = getMatcher(daemon);
-    if (matcher) {
-      const body = await request.json();
-      const text = body?.text;
-      if (typeof text === "string") {
-        if (text.includes(matcher)) {
-          return matcher;
-        }
+  const matcher = getMatcher(daemon);
+  if (matcher) {
+    const body = await request.json();
+    const text = body?.text;
+    if (typeof text === "string") {
+      if (text.includes(matcher)) {
+        return matcher;
       }
     }
   }
@@ -45,7 +33,6 @@ export const formatResponse = (
   matcher: string,
   comment: string
 ) => {
-  markRun(daemon);
   return new Response(
     JSON.stringify({
       result: {

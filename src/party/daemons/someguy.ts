@@ -3,7 +3,7 @@ import { formatResponse, getSample } from "../matchers";
 import { getChatCompletionResponse } from "../openai";
 import differenceInSeconds from "date-fns/differenceInSeconds";
 
-const DAEMON = "nitpicker";
+const DAEMON = "someguy";
 
 let lastRun: Date | null = null;
 
@@ -25,7 +25,7 @@ export default {
       lastRun = new Date();
 
       const comment = await getChatCompletionResponse(`
-        You are a nit-picker. Write a short, obnoxious, nit-picky, one-sentence rebuttal to the phrase "${sample}", starting with the words "Well, actually"
+        Your name is Todd, and you're a frat guy from a 2000s college comedy film. Please say a short, irrelevant bro-ey statement that's friendly and wholesome, but also annoying and dumb.
       `);
 
       if (comment) {

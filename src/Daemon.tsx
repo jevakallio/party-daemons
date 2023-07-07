@@ -13,12 +13,16 @@ export function Daemon({
   color: string;
   active?: boolean;
 }) {
-  const setFocusedDaemon = useActiveDaemon((s) => s.setFocusedDaemon);
+  const state = useActiveDaemon();
   return (
-    <li className="" style={{ color }}>
+    <li className="w-full" style={{ color }}>
       <button
-        className="flex items-center space-x-3 font-bold group"
-        onClick={() => setFocusedDaemon(id)}
+        className="flex items-center space-x-3 font-bold group w-full"
+        onClick={() =>
+          state.focusedDaemon === id
+            ? state.clearFocusedDaemon()
+            : state.setFocusedDaemon(id)
+        }
       >
         <div
           className={classnames({
@@ -28,7 +32,13 @@ export function Daemon({
           })}
           style={{ backgroundColor: color }}
         ></div>
-        <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer">
+        <span
+          className={classnames({
+            "group-hover:opacity-100 transition-opacity duration-300 cursor-pointer":
+              true,
+            "opacity-0": !active,
+          })}
+        >
           {name}
         </span>
       </button>

@@ -1,11 +1,13 @@
 const daemons = {
   nitpicker: "Nitpicker",
-  superfan: "Superfan",
+  superfan: "Supporter",
+  someguy: "Todd",
 };
 
 const colors = {
   nitpicker: "#f87171",
   superfan: "#38bdf8",
+  someguy: "#ffa452",
 };
 
 export type Daemon = keyof typeof daemons;

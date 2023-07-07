@@ -12,7 +12,11 @@ const extensions = getInteractiveExtensions();
 
 // TODO: Read room id from url
 // TOOD: Read room url from env
-const provider = new YPartyKitProvider("localhost:1999", "my-room", ydoc);
+const provider = new YPartyKitProvider(
+  import.meta.env.VITE_PARTYKIT_HOST,
+  "my-room",
+  ydoc
+);
 
 export const Editor = () => {
   const editor = useEditor({

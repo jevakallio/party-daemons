@@ -8,13 +8,13 @@ function App() {
   const focusedDaemonClassName = focusedDaemon ? `focus-${focusedDaemon}` : "";
   return (
     <main className="flex w-full bg-gray-100 justify-center">
-      <section className="w-40 p-4 hidden md:block"></section>
+      <section className="p-4 hidden md:block"></section>
       <section
         className={`flex-1 max-w-xl bg-white md:mx-8 px-6 py-4 rounded ${focusedDaemonClassName}`}
       >
         <Editor />
       </section>
-      <section className="w-40 p-4 hidden md:block">
+      <section className="w-52 p-4 hidden md:flex">
         <Daemons activeDaemon={activeDaemon} />
       </section>
     </main>

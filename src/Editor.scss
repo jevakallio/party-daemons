@@ -2,7 +2,7 @@
 // @import "public/fonts/iAWriterDuospace";
 
 ::selection {
-  background: #fcd7cd;
+  background: #fff7bc;
 }
 
 :root {
@@ -194,7 +194,8 @@ body {
     }
 
     mark[data-editorHighlight] {
-      background-color: #eeeeee;
+      background-color: #f9f9f9;
+      border-radius: 2px;
     }
 
     mark[data-editorHighlight][data-type=nitpicker] {
@@ -204,7 +205,15 @@ body {
     }
 
     mark[data-editorHighlight][data-type=superfan] {
-      background-color: #bae6fd;
+      .focus-superfan & {
+        background-color: #bae6fd;
+      }
+    }
+
+    mark[data-editorHighlight][data-type=someguy] {
+      .focus-someguy & {
+        background-color: #ffda95;
+      }
     }
 
     /* Give a remote user a caret */
