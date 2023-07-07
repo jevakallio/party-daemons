@@ -6,7 +6,8 @@
     },
     "parties": {
       "nitpicker": "./src/party/daemons/nitpicker.ts",
-      "superfan": "./src/party/daemons/superfan.ts"
+      "superfan": "./src/party/daemons/superfan.ts",
+      "someguy": "./src/party/daemons/someguy.ts"
     }
   }
   
