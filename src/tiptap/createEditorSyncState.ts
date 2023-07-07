@@ -6,7 +6,7 @@ import { Node } from "@tiptap/pm/model";
 
 import { getSchema } from "@tiptap/core";
 
-// TODO: `exports` fields manually edited in y-prosemirror package.json
+// @ts-expect-error `exports` fields manually edited in y-prosemirror package.json
 import { updateYFragment } from "y-prosemirror/plugins/sync-plugin";
 
 const transformer = TiptapTransformer.extensions(getSchemaExtensions());
@@ -67,7 +67,6 @@ export function createEditorSyncState(ydoc: Doc) {
     });
 
     return createEditorState(ydoc, [syncChanges]);
-    å;
   } catch (e) {
     console.error("Failed to update editor state", e);
     throw e;
