@@ -21,7 +21,7 @@ export const shimRooms = () => {
   const shim: Record<string, PartyGetter> = {};
   for (const [key, room] of Object.entries(rooms)) {
     shim[key] = {
-      get(id: string) {
+      get(_id: string) {
         return {
           fetch(request: Request) {
             return room.onRequest(request);
