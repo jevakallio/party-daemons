@@ -17,7 +17,10 @@ export function Daemon({
   return (
     <li className="w-full" style={{ color }}>
       <button
-        className="flex items-center space-x-3 font-bold group w-full"
+        className="flex items-center space-x-3 font-bold group w-full border-2 outline-none focus:outline-none"
+        style={{
+          borderColor: state.focusedDaemon === id ? color : "transparent",
+        }}
         onClick={() =>
           state.focusedDaemon === id
             ? state.clearFocusedDaemon()
