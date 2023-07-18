@@ -3,7 +3,7 @@ import type { Request } from "@cloudflare/workers-types";
 
 const matchers: Record<Daemon, string> = {
   nitpicker: "reasoning",
-  superfan: "I don't know",
+  superfan: "not smart enough",
   someguy: "Todd",
 };
 
