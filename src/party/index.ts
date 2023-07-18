@@ -1,4 +1,4 @@
-import { PartyKitServer } from "partykit/server";
+import { PartyKitRoom, PartyKitServer } from "partykit/server";
 import { onConnect } from "y-partykit";
 
 import {
@@ -6,14 +6,10 @@ import {
   createEditorSyncState,
 } from "../tiptap/createEditorSyncState";
 import { insertEditorSuggestions } from "../tiptap/extensions/EditorSuggestion/commands/insertEditorSuggestions";
-import { PartyGetter, shimRooms } from "./rooms";
 
 export default {
   onConnect(ws, room) {
-    // @ts-expect-error multiparty not available in production yet
-    room.parties = shimRooms();
-
-    return onConnect(ws, room, {
+    return onConnect(ws as unknown as WebSocket, room, {
       callback: {
         async handler(ydoc) {
           try {
@@ -21,10 +17,11 @@ export default {
             const text = createEditorState(ydoc).doc.textContent;
 
             // fan out requests to all daemons
+            const daemon = room.parties.daemon;
             const results = await Promise.all([
-              invoke(room.parties.nitpicker, room.id, text),
-              invoke(room.parties.superfan, room.id, text),
-              invoke(room.parties.someguy, room.id, text),
+              invoke(daemon, "superfan", text),
+              invoke(daemon, "nitpicker", text),
+              invoke(daemon, "someguy", text),
             ]);
 
             // return the result for the first daemon that responded with something
@@ -53,7 +50,11 @@ export default {
   },
 } satisfies PartyKitServer;
 
-async function invoke(party: PartyGetter, id: string, text: string) {
+async function invoke(
+  party: PartyKitRoom["parties"]["daemon"],
+  id: string,
+  text: string
+) {
   // get instance of the room
   const worker = party.get(id);
 
@@ -66,8 +67,8 @@ async function invoke(party: PartyGetter, id: string, text: string) {
   });
 
   // make a request to it and return the result
-  const invocation: Response = await worker.fetch(request);
-  const response = await invocation.json();
+  const invocation = await worker.fetch(request);
+  const response = await invocation.json<{ result: any }>();
 
   return response.result;
 }

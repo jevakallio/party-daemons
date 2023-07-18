@@ -22,7 +22,7 @@
     "date-fns": "^2.30.0",
     "lodash": "^4.17.21",
     "openai-edge": "^1.1.1",
-    "partykit": "^0.0.0-3f260d6",
+    "partykit": "^0.0.0-d7cfa23",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "y-partykit": "^0.0.0-e7aa4cd",

@@ -1,4 +1,5 @@
 import { Daemon } from "./daemons";
+import type { Request } from "@cloudflare/workers-types";
 
 const matchers: Record<Daemon, string> = {
   nitpicker: "reasoning",
@@ -16,7 +17,7 @@ export const getSample = async (
 ): Promise<string | null> => {
   const matcher = getMatcher(daemon);
   if (matcher) {
-    const body = await request.json();
+    const body = await request.json<{ text: string }>();
     const text = body?.text;
     if (typeof text === "string") {
       if (text.toLowerCase().includes(matcher.toLowerCase())) {
